@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ItemListarComponent implements OnInit {
   
   itens$: Observable<Item[]>;
-
+  colunasTabela = ['id', 'nome'];
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {

@@ -1,9 +1,24 @@
-<p>Lista de Itens</p>
-
-<ul *ngIf="itens$ | async as itens; else loading">
-    <li *ngFor="let item of itens">{{item.nome}}</li>
-</ul>
+<mat-toolbar>Lista de APIs</mat-toolbar>
 <ng-template #loading>
-    Carregando...
+    <mat-spinner></mat-spinner>
 </ng-template>
+<div class="componente-container">
+    <div *ngIf="itens$ | async as itens; else loading">
+        <table mat-table [dataSource]="itens" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let item"> {{item.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let item"> {{item.nome}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>
+        </table>
+    </div>
+    <div class="linha-botoes">
+        <button mat-raised-button color="primary" routerLink="/itens/cadastrar">Cadastrar</button>
+    </div>
+</div>
 
