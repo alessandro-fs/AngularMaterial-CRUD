@@ -12,11 +12,23 @@ export class ItemService {
   
   constructor(private httpClient: HttpClient) { }
     
-  listar():Observable<Item[]>{
+    listar():Observable<Item[]>{
       return this.httpClient.get<Item[]>(`${this.baseUrl}/${this.endpoint}`);
     }
 
     cadastrar(item: Item):Observable<Item>{
       return this.httpClient.post<Item>(`${this.baseUrl}/${this.endpoint}`, item);
+    }
+
+    pesquisarPorId(id: string): Observable<Item>{
+      return this.httpClient.get<Item>(`${this.baseUrl}/${this.endpoint}/${id}`);
+    }
+
+    atualizar(item: Item): Observable<Item>{
+      return this.httpClient.put<Item>(`${this.baseUrl}/${this.endpoint}/${item.id}`, item);
+    }
+
+    deletar(item: Item): Observable<{}>{
+      return this.httpClient.delete<Item>(`${this.baseUrl}/${this.endpoint}/${item.id}`);
     }
 }

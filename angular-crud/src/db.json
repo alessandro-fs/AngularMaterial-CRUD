@@ -1,20 +1,20 @@
-{  
-	"itens":[  
-	{  
-		"id":1,
-		"nome":"API de Transferência"
-	},
-	{  
-		"id":2,
-		"nome":"API de Boleto"
-	},
-	{  
-		"id":3,
-		"nome":"API Pagamento"
-	},
-	{  
-		"id":4,
-		"nome":"API de Extrato"
-	}
-	]
+{
+  "itens": [
+    {
+      "id": 1,
+      "nome": "API de Transferência"
+    },
+    {
+      "id": 2,
+      "nome": "API de Boleto"
+    },
+    {
+      "id": 3,
+      "nome": "API Pagamento"
+    },
+    {
+      "id": 4,
+      "nome": "API de Extrato"
+    }
+  ]
 }
