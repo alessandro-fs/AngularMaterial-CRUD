@@ -1,3 +1,5 @@
+import { QueryBuilder, Page } from './../_util/Pagination';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Item } from './item.model';
@@ -12,9 +14,15 @@ export class ItemService {
   
   constructor(private httpClient: HttpClient) { }
     
-    listar():Observable<Item[]>{
-      return this.httpClient.get<Item[]>(`${this.baseUrl}/${this.endpoint}`);
-    }
+  listar(queryBuilder: QueryBuilder): Observable<Page<Item>> {
+
+    return this.httpClient
+    .get<Item[]>(`${this.baseUrl}/${this.endpoint}?${queryBuilder.buildQueryString()}`, {observe: 'response'})
+    .pipe(
+        map(response => <Page<Item>>Page.fromResponse(response))
+    );
+
+}
 
     cadastrar(item: Item):Observable<Item>{
       return this.httpClient.post<Item>(`${this.baseUrl}/${this.endpoint}`, item);
@@ -28,7 +36,7 @@ export class ItemService {
       return this.httpClient.put<Item>(`${this.baseUrl}/${this.endpoint}/${item.id}`, item);
     }
 
-    deletar(item: Item): Observable<{}>{
-      return this.httpClient.delete<Item>(`${this.baseUrl}/${this.endpoint}/${item.id}`);
-    }
+    deletar(item: Item):Observable<{}> {
+      return this.httpClient.delete(`${this.baseUrl}/${this.endpoint}/${item.id}`);
+  }
 }
